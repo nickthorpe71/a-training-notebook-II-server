@@ -1,6 +1,4 @@
 TRUNCATE
   users,
-  workouts,
-  exercises,
-  sets
+  workouts
   RESTART IDENTITY CASCADE;
