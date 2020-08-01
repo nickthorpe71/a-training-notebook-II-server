@@ -42,14 +42,13 @@ workoutsRouter
     };
 
     WorkoutsService.addWorkout(req.app.get('db'), newWorkout)
-      .then(workout => {
-
+      .then(workout =>
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${workout.id}`))
-          .json(workout); //need to add serialization
+          .json(workout) //need to add serialization
 
-      })
+      )
       .catch(next);
   })
 
@@ -89,9 +88,9 @@ workoutsRouter
       req.query.workout_id,
       workoutToUpdate
     )
-      .then(() => {
-        res.status(204).end();
-      })
+      .then(() =>
+        res.status(204).end()
+      )
       .catch(next);
   });
 
@@ -105,11 +104,11 @@ workoutsRouter
     if ('workout_date' in req.query) {
       const workout_date = req.query.workout_date;
       WorkoutsService.getworkoutsByUserAndDate(req.app.get('db'), user_id, workout_date)
-        .then(res => {
+        .then(workouts =>
           res
             .status(200)
-            .json(res);
-        })
+            .json(workouts)
+        )
         .catch(next);
     }
 
@@ -117,11 +116,11 @@ workoutsRouter
     if ('month' in req.query) {
       const month = req.query.month;
       WorkoutsService.getWorkoutsByMonth(req.app.get('db'), month, user_id)
-        .then(res => {
+        .then(workouts =>
           res
             .status(200)
-            .json(res);
-        });
+            .json(workouts)
+        );
     }
 
     //if workout_id
@@ -129,10 +128,10 @@ workoutsRouter
       const workout_id = req.query.workout_id;
 
       WorkoutsService.getWorkoutById(req.app.get('db'), workout_id)
-        .then(res => {
+        .then(workout => {
           res
             .status(200)
-            .json(res);
+            .json(workout);
         })
         .catch(next);
     }
