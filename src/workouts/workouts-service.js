@@ -22,7 +22,7 @@ const WorkoutsService = {
     return db
       .select('*')
       .from('workouts')
-      .andWhereRaw(`EXTRACT(MONTH FROM workout_date::date) = ?`, [month])
+      .andWhereRaw('EXTRACT(MONTH FROM workout_date::date) = ?', [month])
       .where('user_id', user_id);
   },
 
@@ -53,7 +53,12 @@ const WorkoutsService = {
   serializeWorkout(workout) {
     return {
       id: workout.id,
-
+      workout_date: workout.workout_date,
+      user_id: workout.user_id,
+      title: xss(workout.title),
+      workout_start_time: workout.workout_start_time,
+      workout_end_time: workout.workout_end_time,
+      exercises: xss(workout.exercises)
     };
   }
 };

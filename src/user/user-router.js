@@ -31,12 +31,6 @@ userRouter.post('/', jsonBodyParser, (req, res, next) => {
           (user) => {
             res
               .status(201)
-              // .location(
-              //   path.posix.join(
-              //     'https://blooming-reef-26525.herokuapp.com',
-              //     `/cabinet/${user.id}`
-              //   )
-              // )
               .json(UserService.serializeUser(user));
           }
         );
