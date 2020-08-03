@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs');
 const config = require('../config');
 
 const AuthService = {
-  getUserWithUserName(db, email) {
+  getUserWithUserName(db, username) {
     return db('users')
       .select('*')
-      .where({ email })
+      .where({ username })
       .first();
   },
   comparePasswords(password, hash) {

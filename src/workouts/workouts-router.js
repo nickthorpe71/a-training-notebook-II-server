@@ -16,7 +16,6 @@ workoutsRouter
       workout_start_time,
       workout_end_time,
       workout_date,
-      notes,
       exercises
     } = req.body;
 
@@ -37,7 +36,6 @@ workoutsRouter
       user_id,
       workout_start_time,
       workout_end_time,
-      notes,
       exercises
     };
 
@@ -60,7 +58,6 @@ workoutsRouter
       workout_start_time,
       workout_end_time,
       workout_date,
-      notes,
       exercises
     } = req.body;
 
@@ -70,7 +67,6 @@ workoutsRouter
       workout_start_time,
       workout_end_time,
       workout_date,
-      notes,
       exercises
     };
 
@@ -78,7 +74,7 @@ workoutsRouter
     if (numberOfValues === 0) {
       return res.status(400).json({
         error: {
-          message: 'Request body must contain title, notes, time, date or exercises'
+          message: 'Request body must contain title, time, date or exercises'
         }
       });
     }

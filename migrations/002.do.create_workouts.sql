@@ -5,7 +5,6 @@ CREATE TABLE workouts (
   workout_end_time TIME with time zone,
   title TEXT NOT NULL,
   exercises TEXT,
-  notes TEXT,
   user_id INTEGER
     REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),

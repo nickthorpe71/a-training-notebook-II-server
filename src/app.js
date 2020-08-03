@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const authRouter = require('./auth/auth-router');
+const userRouter = require('./user/user-router');
 const workoutsRouter = require('./workouts/workouts-router');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(helmet());
 
 app.use('/api/auth', authRouter);
 app.use('/api/workouts', workoutsRouter);
+app.use('/api/users', userRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use(function errorHandler(error, req, res, next) {
