@@ -18,11 +18,12 @@ const WorkoutsService = {
       .where('id', workout_id);
   },
 
-  getWorkoutsByMonth(db, month, user_id) {
+  getWorkoutsByMonth(db, month, year, user_id) {
     return db
       .select('*')
       .from('workouts')
       .andWhereRaw('EXTRACT(MONTH FROM workout_date::date) = ?', [month])
+      .andWhereRaw('EXTRACT(YEAR FROM workout_date::date) = ?', [year])
       .where('user_id', user_id);
   },
 

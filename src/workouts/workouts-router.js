@@ -44,7 +44,7 @@ workoutsRouter
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${workout.id}`))
-          .json(workout) //need to add serialization
+          .json(WorkoutsService.serializeWorkout(workout)) //need to add serialization
 
       )
       .catch(next);
@@ -103,7 +103,7 @@ workoutsRouter
         .then(workouts =>
           res
             .status(200)
-            .json(workouts)
+            .json(WorkoutsService.serializeWorkout(workouts))
         )
         .catch(next);
     }
@@ -111,11 +111,12 @@ workoutsRouter
     //if month
     if ('month' in req.query) {
       const month = req.query.month;
-      WorkoutsService.getWorkoutsByMonth(req.app.get('db'), month, user_id)
+      const year = req.query.year;
+      WorkoutsService.getWorkoutsByMonth(req.app.get('db'), month, year, user_id)
         .then(workouts =>
           res
             .status(200)
-            .json(workouts)
+            .json(WorkoutsService.serializeWorkout(workouts))
         );
     }
 
@@ -127,7 +128,7 @@ workoutsRouter
         .then(workout => {
           res
             .status(200)
-            .json(workout);
+            .json(WorkoutsService.serializeWorkout(workout));
         })
         .catch(next);
     }
