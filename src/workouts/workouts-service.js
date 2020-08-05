@@ -24,7 +24,7 @@ const WorkoutsService = {
     return db
       .select('*')
       .from('workouts')
-      .whereBetween('createdAt', [from, to])
+      .whereBetween('workout_date', [from, to])
       // .andWhereRaw('EXTRACT(MONTH FROM workout_date::date) = ?', [month])
       // .andWhereRaw('EXTRACT(YEAR FROM workout_date::date) = ?', [year])
       .where('user_id', user_id);
