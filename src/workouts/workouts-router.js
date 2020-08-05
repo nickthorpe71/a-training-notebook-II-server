@@ -92,7 +92,7 @@ workoutsRouter
 
 workoutsRouter
   .route('/:user_id')
-  .all(requireAuth)
+  // .all(requireAuth)
   .get((req, res, next) => {
     const { user_id } = req.params;
 
@@ -116,7 +116,7 @@ workoutsRouter
         .then(workouts => {
           res
             .status(200)
-            .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)));
+            .json(workouts);//
         });
     }
 
