@@ -103,7 +103,7 @@ workoutsRouter
         .then(workouts =>
           res
             .status(200)
-            .json(WorkoutsService.serializeWorkout(workouts))
+            .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)))
         )
         .catch(next);
     }
@@ -116,7 +116,7 @@ workoutsRouter
         .then(workouts => {
           res
             .status(200)
-            .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)));//
+            .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)));
         });
     }
 
