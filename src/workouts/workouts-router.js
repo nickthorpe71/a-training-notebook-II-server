@@ -116,7 +116,7 @@ workoutsRouter
         .then(workouts => {
           res
             .status(200)
-            .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)));
+            .json(workouts);
         })
         .catch(next);
     }
@@ -127,9 +127,9 @@ workoutsRouter
 
       WorkoutsService.getWorkoutById(req.app.get('db'), workout_id)
         .then(workout => {
-          return res
+          res
             .status(200)
-            .json(workout);
+            .json(WorkoutsService.serializeWorkout(workout));
         })
         .catch(next);
     }
