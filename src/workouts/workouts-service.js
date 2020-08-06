@@ -19,17 +19,14 @@ const WorkoutsService = {
   },
 
   getWorkoutsByMonth(db, month, year, user_id) {
-    let maxDays = function (month, year) {
-      return new Date(year, month, 0).getDate();
-    };
+    let maxDays = new Date(year, month, 0).getDate();
+
     const from = `${year}-${month}-01`;
     const to = `${year}-${month}-${maxDays}`;
     return db
       .select('*')
       .from('workouts')
       .whereBetween('workout_date', [from, to])
-      // .andWhereRaw('EXTRACT(MONTH FROM workout_date::date) = ?', [month])
-      // .andWhereRaw('EXTRACT(YEAR FROM workout_date::date) = ?', [year])
       .where('user_id', user_id);
   },
 
