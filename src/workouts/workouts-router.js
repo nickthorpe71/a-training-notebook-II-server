@@ -126,11 +126,11 @@ workoutsRouter
       const workout_id = req.query.workout_id;
 
       WorkoutsService.getWorkoutById(req.app.get('db'), workout_id)
-        .then(workout => {
+        .then(workout =>
           res
             .status(200)
-            .json(WorkoutsService.serializeWorkout(workout));
-        })
+            .json(WorkoutsService.serializeWorkout(workout))
+        )
         .catch(next);
     }
   })
