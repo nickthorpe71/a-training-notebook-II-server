@@ -114,9 +114,9 @@ workoutsRouter
       const year = req.query.year;
       WorkoutsService.getWorkoutsByMonth(req.app.get('db'), month, year, user_id)
         .then(workouts => {
-          return res
+          res
             .status(200)
-            .json(workouts);
+            .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)));
         })
         .catch(next);
     }

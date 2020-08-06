@@ -19,8 +19,11 @@ const WorkoutsService = {
   },
 
   getWorkoutsByMonth(db, month, year, user_id) {
+    let maxDays = function (month, year) {
+      return new Date(year, month, 0).getDate();
+    };
     const from = `${year}-${month}-01`;
-    const to = `${year}-${month}-31`;
+    const to = `${year}-${month}-${maxDays}`;
     return db
       .select('*')
       .from('workouts')
