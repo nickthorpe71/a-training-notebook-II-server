@@ -117,7 +117,8 @@ workoutsRouter
           res
             .status(200)
             .json(workouts.map(exercise => WorkoutsService.serializeWorkout(exercise)));
-        });
+        })
+        .catch(next);
     }
 
     //if workout_id
