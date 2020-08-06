@@ -127,7 +127,7 @@ workoutsRouter
 
       WorkoutsService.getWorkoutById(req.app.get('db'), workout_id)
         .then(workout => {
-          res
+          return res
             .status(200)
             .json(WorkoutsService.serializeWorkout(workout));
         })
