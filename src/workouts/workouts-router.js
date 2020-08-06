@@ -129,7 +129,7 @@ workoutsRouter
         .then(workout => {
           return res
             .status(200)
-            .json(WorkoutsService.serializeWorkout(workout));
+            .json(workout);
         })
         .catch(next);
     }
