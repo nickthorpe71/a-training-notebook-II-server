@@ -28,4 +28,4 @@ Further instructions:
 https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
 
 
-# API documentation
+# a training notebook API documentation
