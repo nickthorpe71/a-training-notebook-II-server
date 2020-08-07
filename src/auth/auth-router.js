@@ -13,6 +13,8 @@ authRouter
 
     if (typeof loginUser.username !== 'undefined' && loginUser.username)
       loginUser.username = username.toLowerCase();
+    else
+      return res.status(400).json({ error: 'Missing \'username\' in request body' });
 
     for (const [key, value] of Object.entries(loginUser))
       if (!value)
