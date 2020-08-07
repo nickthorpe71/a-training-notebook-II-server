@@ -28,7 +28,7 @@ Further instructions:
 https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
 
 
-# a training notebooke API documentation
+# a training notebook API documentation
 
 After deploying an instance of this API use this documentation to access it
 
