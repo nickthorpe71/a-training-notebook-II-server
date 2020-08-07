@@ -1,4 +1,4 @@
-# a training notebooke API documentation
+# A Training Notebook API documentation
 
 After deploying an instance of this API use this documentation to access it
 

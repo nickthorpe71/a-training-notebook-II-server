@@ -1,4 +1,4 @@
-# a training notebook installation
+# A Training Notebook installation
 
 ## Cloning
 After cloning from github:
