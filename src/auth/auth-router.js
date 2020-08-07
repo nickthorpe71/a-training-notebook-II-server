@@ -11,13 +11,12 @@ authRouter
     const { username, password } = req.body;
     const loginUser = { username, password };
 
-    if (loginUser.username !== void (0))
+    if (typeof loginUser.username !== 'undefined' && loginUser.username)
       loginUser.username = username.toLowerCase();
 
     for (const [key, value] of Object.entries(loginUser))
       if (!value)
         return res.status(400).json({ error: `Missing '${key}' in request body` });
-
 
     return AuthService.getUserWithUserName(req.app.get('db'), loginUser.username)
       .then(user => {
