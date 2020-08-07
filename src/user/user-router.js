@@ -6,7 +6,10 @@ const userRouter = express.Router();
 const jsonBodyParser = express.json();
 
 userRouter.post('/', jsonBodyParser, (req, res, next) => {
-  const { password, username, email } = req.body;
+  let { password, username, email } = req.body;
+
+  username = username.toLowerCase();
+
   for (const field of ['username', 'password', 'email'])
     if (!req.body[field])
       return res.status(400).json({
