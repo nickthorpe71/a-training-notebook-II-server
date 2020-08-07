@@ -24,11 +24,11 @@ describe('Auth Endpoints', function () {
 
   describe('POST /api/auth/login', () => {
     beforeEach('insert users', () => helpers.seedUsersTable(db, testUsers));
-    const requiredFields = ['email', 'password'];
+    const requiredFields = ['username', 'password'];
 
     requiredFields.forEach((field) => {
       const loginAttemptBody = {
-        email: testUser.email,
+        username: testUser.username,
         password: testUser.password,
       };
       it(`Responds with 400 required error when '${field}' is missing`, () => {
@@ -40,17 +40,17 @@ describe('Auth Endpoints', function () {
           .expect(400, { error: `Missing '${field}' in request body` });
       });
     });
-    it('Responds 400 \'Invalid email or password\' when bad email', () => {
-      const userInvalidEmail = {
-        email: 'user_not',
+    it('Responds 400 \'Invalid username or password\' when bad username', () => {
+      const userInvalidUsername = {
+        username: 'user_not',
         password: 'existy',
       };
       return supertest(app)
         .post('/api/auth/login')
-        .send(userInvalidEmail)
-        .expect(400, { error: 'Incorrect Email or Password' });
+        .send(userInvalidUsername)
+        .expect(400, { error: 'Incorrect Username or Password' });
     });
-    it('Responds 400 \'Invalid email or password\' when bad password', () => {
+    it('Responds 400 \'Invalid username or password\' when bad password', () => {
       const userInvalidPassword = {
         email: testUser.email,
         password: 'existy',
@@ -58,7 +58,7 @@ describe('Auth Endpoints', function () {
       return supertest(app)
         .post('/api/auth/login')
         .send(userInvalidPassword)
-        .expect(400, { error: 'Incorrect Email or Password' });
+        .expect(400, { error: 'Missing \'username\' in request body' });
     });
     it('Responds 200 and JWT auth Token and user ID using secret when valid', () => {
       const userValid = {
@@ -70,7 +70,7 @@ describe('Auth Endpoints', function () {
         { user_id: testUser.id },
         process.env.JWT_SECRET,
         {
-          subject: testUser.email,
+          subject: testUser.username,
           algorithm: 'HS256',
         }
       );

@@ -19,7 +19,6 @@ workoutsRouter
       exercises
     } = req.body;
 
-    //need to add time column to table
     const tempWorkout = {
       workout_date,
       title,
@@ -44,14 +43,13 @@ workoutsRouter
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${workout.id}`))
-          .json(WorkoutsService.serializeWorkout(workout)) //need to add serialization
+          .json(WorkoutsService.serializeWorkout(workout))
 
       )
       .catch(next);
   })
 
   .patch(bodyParser, (req, res, next) => {
-    //remember to change updated time on patch
     const {
       user_id,
       title,
@@ -92,7 +90,7 @@ workoutsRouter
 
 workoutsRouter
   .route('/:user_id')
-  // .all(requireAuth)
+  .all(requireAuth)
   .get((req, res, next) => {
     const { user_id } = req.params;
 
