@@ -1,32 +1,308 @@
-# A Training Notebook installation
+# A Training Notebook 
 
-## Cloning
-After cloning from github:
+## Link to the live app
+https://atrainingnotebook.vercel.app/
 
-rm -rf .git && git init
-Now you have no previous commits in the test-project for a fresh git project.
+## API Documentation
 
-Now install the npm dependencies npm install.
+After deploying an instance of this API use this documentation to access it
 
-## Scripts
+## BASE_URL
 
-Start the application `npm start`
+https://[herokuURL]/api/
 
-Start nodemon for the application `npm run dev`
+## Get workouts by date: 
 
-Run the tests `npm test`
+### Method: GET
 
-## Deploying API
+### URL Params
 
-When you're ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+Required: workout_date=[date]
 
-## Deploying Database
+### Success Response:
 
-Using the provided migration files, deploy your Postgres database to heroku.
+Code: 200
+Content: [{ 
+  user_id,
+  title,
+  workout_start_time,
+  workout_end_time,
+  workout_date,
+  exercises
+ }]
 
-Further instructions: 
-https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+
+Code: 400 BAD REQUEST
+Content: { error : "bad request" }
+
+### Sample Call:
+
+BASE_URL/workouts/[user_id(int)]?workout_date=[date]
+
+## Get workouts by month: 
+
+### Method: GET
+
+### URL Params
+
+Required: 
+month=[int]
+year=[int]
+
+### Success Response:
+
+Code: 200
+Content: [{ 
+  user_id,
+  title,
+  workout_start_time,
+  workout_end_time,
+  workout_date,
+  exercises
+ }]
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+
+Code: 400 BAD REQUEST
+Content: { error : "bad request" }
+
+### Sample Call:
+
+BASE_URL/workouts/[user_id(int)]?month=[int]&year=[int]
+
+## Get workout by ID: 
+
+### Method: GET
+
+### URL Params
+
+Required: 
+id=[int]
+
+### Success Response:
+
+Code: 200
+Content: { 
+  user_id,
+  title,
+  workout_start_time,
+  workout_end_time,
+  workout_date,
+  exercises
+ }
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+
+Code: 400 BAD REQUEST
+Content: { error : "bad request" }
+
+### Sample Call:
+
+BASE_URL/workouts/[user_id(int)]?workout_id=[int]
+
+## Post workout: 
+
+### Method: POST
+
+### Request Body
+
+Include workout object in body of request:
+Ecample: 
+newWorkout = {
+  user_id,
+  title,
+  workout_start_time,
+  workout_end_time,
+  workout_date,
+  exercises
+ }
+
+### Success Response:
+
+Code: 201
+Content: { 
+  user_id,
+  title,
+  workout_start_time,
+  workout_end_time,
+  workout_date,
+  exercises
+ }
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'workout_date' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'title' in request body" }
+
+### Sample Call:
+
+BASE_URL/workouts/
+
+## Patch/Update workout: 
+
+### Method: PATCH
+
+### URL Params
+
+Required: 
+workout_id=[int]
+
+### Request Body
+
+Include workout object with the info to be updated in body of request:
+Ecample: 
+infoToUpdate = {
+  title,
+  exercises
+}
+
+### Success Response:
+
+Code: 204
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+
+Code: 400 BAD REQUEST
+Content: { error : "Request body must contain title, time, date or exercises" }
 
 
-# a training notebook API documentation
-https://github.com/nickthorpe71/a-training-notebook-II-server/blob/master/API_Documentation.md
+### Sample Call:
+
+BASE_URL/workouts/?workout_id=[int]
+
+## Post user: 
+
+### Method: POST
+
+### Request Body
+
+newUser = {
+  username: username,
+  password: password,
+  email: email
+}
+
+### Success Response:
+
+Code: 201
+Content: {
+  username,
+  password,
+  email
+}
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'username' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'password' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'email' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'username taken' in request body" }
+
+### Sample Call:
+
+BASE_URL/users
+
+
+## Login Authorization: 
+
+### Method: POST
+
+### Request Body
+
+newUser = {
+  username: username,
+  password: password,
+}
+
+### Success Response:
+
+Code: 201
+Content: {
+  username,
+  password,
+}
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'username' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'password' in request body" }
+
+### Sample Call:
+
+BASE_URL/auth/login
+
+## Screenshots
+![image](https://user-images.githubusercontent.com/57202558/89674122-39453480-d8ad-11ea-8387-14ad56d96fe7.png)
+![image](https://user-images.githubusercontent.com/57202558/89674246-74476800-d8ad-11ea-884b-d35780b964ac.png)
+![image](https://user-images.githubusercontent.com/57202558/89674871-7cec6e00-d8ae-11ea-827a-4a87784d9176.png)
+
+## Summary
+This project is called "a training notebook" because that is exactly what it is meant to supersede. Gym goers have carried notebooks or tracked their workouts on their phones for decades. In an effort to organize this ancient practice I have created a very simple and effective way to record and reacll your workouts.
+
+## Tech
+* React.js
+* Node.js
+* Express.js
+* Server: Heroku
+* Vercel
+* Chai
+* Nodemon
+* Supertest
+* Mocha
+* Enzyme
+
+## Contact
+LinkedIn: https://www.linkedin.com/in/nick-thorpe-dev/
+

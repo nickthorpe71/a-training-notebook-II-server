@@ -1,4 +1,4 @@
-# A Training Notebook API documentation
+# API documentation
 
 After deploying an instance of this API use this documentation to access it
 
@@ -195,7 +195,85 @@ Content: { error : "Request body must contain title, time, date or exercises" }
 
 BASE_URL/workouts/?workout_id=[int]
 
+## Post user: 
+
+### Method: POST
+
+### Request Body
+
+newUser = {
+  username: username,
+  password: password,
+  email: email
+}
+
+### Success Response:
+
+Code: 201
+Content: {
+  username,
+  password,
+  email
+}
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'username' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'password' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'email' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'username taken' in request body" }
+
+### Sample Call:
+
+BASE_URL/users
 
 
+## Login Authorization: 
 
+### Method: POST
 
+### Request Body
+
+newUser = {
+  username: username,
+  password: password,
+}
+
+### Success Response:
+
+Code: 201
+Content: {
+  username,
+  password,
+}
+
+### Error Response:
+
+Code: 401 UNAUTHORIZED
+Content: { error : "Unauthorized request" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'username' in request body" }
+
+OR
+Code: 400 BAD REQUEST
+Content: { error : "Missing 'password' in request body" }
+
+### Sample Call:
+
+BASE_URL/auth/login
