@@ -18,7 +18,11 @@ const UserService = {
     }
     return null;
   },
-
+  getUsers(db) {
+    return db
+      .select('*')
+      .from('users');
+  },
   hasUserWithUsername(db, username) {
     return db('users')
       .where({ username })

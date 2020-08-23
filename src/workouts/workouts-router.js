@@ -48,7 +48,6 @@ workoutsRouter
       )
       .catch(next);
   })
-
   .patch(bodyParser, (req, res, next) => {
     const {
       user_id,
@@ -94,7 +93,7 @@ workoutsRouter
   .get((req, res, next) => {
     const { user_id } = req.params;
 
-    //if workout_date
+    //if workout_date <- expand on this
     if ('workout_date' in req.query) {
       const workout_date = req.query.workout_date;
       WorkoutsService.getworkoutsByUserAndDate(req.app.get('db'), user_id, workout_date)
