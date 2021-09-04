@@ -295,7 +295,7 @@ This project is called "a training notebook" because that is exactly what it is 
 * React.js
 * Node.js
 * Express.js
-* Server: Heroku
+* Deployment: Heroku
 * Vercel
 * Chai
 * Nodemon
